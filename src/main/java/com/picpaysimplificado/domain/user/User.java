@@ -1,4 +1,5 @@
-package com.picpaysimplificado.models;
+package com.picpaysimplificado.domain.user;
+import com.picpaysimplificado.Enumaration.UserType;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
-public class ModelUsers {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.picpaysimplificado.models;
+package com.picpaysimplificado.Enumaration;
 
 public enum UserType {
 
