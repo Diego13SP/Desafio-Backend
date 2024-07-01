@@ -1,10 +1,12 @@
 package com.picpaysimplificado.domain.user.transaction;
 
 
+import com.picpaysimplificado.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity(name="transactions")
 @Table(name="transactions")
@@ -18,4 +20,11 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal amount;
+    @ManyToOne
+    @JoinColumn(name="sender-id")
+    private User sender;
+    @ManyToOne
+    @JoinColumn(name="receiver-id")
+    private User receiver;
+    private LocalDateTime timestamp;
 }
