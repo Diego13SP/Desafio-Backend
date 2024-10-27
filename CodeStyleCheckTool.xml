@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CodeStyleChecker>
     <!-- set the "src" directory where the source codes are stored -->
-    <SourceDir>C:\workstation\workspace\git\gitOyster\CodeStyleChecker\src</SourceDir>
+    <SourceDir>C:/Desenvolvimento/Desafio-Backend/src</SourceDir>
     <!-- set the files to check -->
     <FileInclusion>
         src/main/java/info/woody/api/intellij/plugin/csct/core/CodeStyleCheckRule.groovy
