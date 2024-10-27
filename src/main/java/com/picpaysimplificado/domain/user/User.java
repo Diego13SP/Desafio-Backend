@@ -1,4 +1,4 @@
-package com.picpaysimplificado.domain;
+package com.picpaysimplificado.domain.user;
 import com.picpaysimplificado.Enumaration.UserType;
 import com.picpaysimplificado.dto.UserDTO;
 import jakarta.persistence.*;
@@ -43,6 +43,7 @@ public class User {
         this.balance = data.balance();
         this.userType = data.userType();
         this.password = data.password();
+        this.document = data.document();
         this.email = data.email();
 
 

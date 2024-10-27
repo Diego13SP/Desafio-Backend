@@ -1,6 +1,6 @@
 package com.picpaysimplificado.services;
 
-import com.picpaysimplificado.domain.User;
+import com.picpaysimplificado.domain.user.User;
 import com.picpaysimplificado.dto.NotificationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
