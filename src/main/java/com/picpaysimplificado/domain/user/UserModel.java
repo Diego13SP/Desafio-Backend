@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of="id")
-public class User {
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +23,6 @@ public class User {
 
     @Column(unique = true)
     private String document;
-
-    private String senha;
-
     private String firstName;
 
     private String lastName;
@@ -37,7 +34,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    public  User(UserDTO data){
+    public UserModel(UserDTO data){
         this.firstName = data.firstName();
         this.lastName = data.lastName();
         this.balance = data.balance();

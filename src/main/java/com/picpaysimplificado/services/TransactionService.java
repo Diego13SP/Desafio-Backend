@@ -1,8 +1,8 @@
 package com.picpaysimplificado.services;
 
 
-import com.picpaysimplificado.domain.user.User;
-import com.picpaysimplificado.domain.transaction.Transaction;
+import com.picpaysimplificado.domain.user.UserModel;
+import com.picpaysimplificado.domain.transaction.TransactionModel;
 import com.picpaysimplificado.dto.TransactionDTO;
 import com.picpaysimplificado.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ public class TransactionService {
     @Autowired
     private NotificationService notificationService;
 
-    public  Transaction createTransaction(TransactionDTO transaction) throws Exception {
+    public TransactionModel createTransaction(TransactionDTO transaction) throws Exception {
 
-        User sender = this.userService.findUserById(transaction.senderId());
-        User receiver = this.userService.findUserById(transaction.senderId());
+        UserModel sender = this.userService.findUserById(transaction.senderId());
+        UserModel receiver = this.userService.findUserById(transaction.senderId());
         userService.validateTransaction(sender, transaction.value());
 
         boolean isAuthorized = this.authorizeTransaction(sender, transaction.value());
@@ -42,26 +42,26 @@ public class TransactionService {
             throw new Exception("Transação não autorizada");  // TODO: 45:46
         }
 
-        Transaction newTransaction = new Transaction();
-        newTransaction.setAmount(transaction.value());
-        newTransaction.setSender(sender);
-        newTransaction.setReceiver(receiver);
-        newTransaction.setTimestamp(LocalDateTime.now());
+        TransactionModel newTransactionModel = new TransactionModel();
+        newTransactionModel.setAmount(transaction.value());
+        newTransactionModel.setSender(sender);
+        newTransactionModel.setReceiver(receiver);
+        newTransactionModel.setTimestamp(LocalDateTime.now());
 
         sender.setBalance(sender.getBalance().subtract(transaction.value()));
         receiver.setBalance(receiver.getBalance().add(transaction.value()));
 
-        this.repository.save(newTransaction);
+        this.repository.save(newTransactionModel);
         this.userService.saveUser(sender);
         this.userService.saveUser(receiver);
 
         this.notificationService.sendNotification(sender,"Transação realizada com sucesso");
         this.notificationService.sendNotification(receiver,"Transação recebida com sucesso");
 
-        return newTransaction;
+        return newTransactionModel;
     }
 
-    public boolean authorizeTransaction(User sender, BigDecimal value){
+    public boolean authorizeTransaction(UserModel sender, BigDecimal value){
         ResponseEntity<Map> authorizationResponse = restTemplate.getForEntity("https://util.devi.tools/api/v2/authorize",Map.class);
         if (authorizationResponse.getStatusCode() == HttpStatus.OK){
             String message = (String)authorizationResponse.getBody().get("message");

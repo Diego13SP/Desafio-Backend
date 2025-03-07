@@ -1,6 +1,6 @@
 package com.picpaysimplificado.controllers;
 
-import com.picpaysimplificado.domain.transaction.Transaction;
+import com.picpaysimplificado.domain.transaction.TransactionModel;
 import com.picpaysimplificado.dto.TransactionDTO;
 import com.picpaysimplificado.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ public class TransactionController {
 
     @PostMapping
 
-    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDTO transaction) throws Exception{
-        Transaction newTransaction = this.transactionService.createTransaction(transaction);
-        return new ResponseEntity<>(newTransaction, HttpStatus.OK);
+    public ResponseEntity<TransactionModel> createTransaction(@RequestBody TransactionDTO transaction) throws Exception{
+        TransactionModel newTransactionModel = this.transactionService.createTransaction(transaction);
+        return new ResponseEntity<>(newTransactionModel, HttpStatus.OK);
 
     }
 

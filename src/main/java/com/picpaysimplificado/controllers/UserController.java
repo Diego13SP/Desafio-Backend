@@ -1,7 +1,7 @@
 package com.picpaysimplificado.controllers;
 
 
-import com.picpaysimplificado.domain.user.User;
+import com.picpaysimplificado.domain.user.UserModel;
 import com.picpaysimplificado.dto.UserDTO;
 import com.picpaysimplificado.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 
 public class UserController {
 
@@ -20,15 +21,19 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserDTO user){
-        User newUser = userService.createUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    public ResponseEntity<UserModel> createUser(@RequestBody UserDTO user){
+        UserModel userModel = userService.createUser(user);
+        return new ResponseEntity<>(userModel, HttpStatus.CREATED);
     }
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
-       List<User>   users = this.userService.getAllUsers();
-       return new ResponseEntity<>(users,HttpStatus.OK);
+    public ResponseEntity<List<UserModel>> getAllUsers(){
+       List<UserModel> userModels = this.userService.getAllUsers();
+        System.out.println("ok");
+       return new ResponseEntity<>(userModels,HttpStatus.OK);
+
     }
+
+
 
 
 }

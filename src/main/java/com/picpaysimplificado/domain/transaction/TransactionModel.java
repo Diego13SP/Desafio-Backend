@@ -1,9 +1,10 @@
 package com.picpaysimplificado.domain.transaction;
-
-
-import com.picpaysimplificado.domain.user.User;
+import com.picpaysimplificado.domain.user.UserModel;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode(of="id")
 @NoArgsConstructor
-public class Transaction {
+public class TransactionModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +23,9 @@ public class Transaction {
     private BigDecimal amount;
     @ManyToOne
     @JoinColumn(name="sender-id")
-    private User sender;
+    private UserModel sender;
     @ManyToOne
     @JoinColumn(name="receiver-id")
-    private User receiver;
+    private UserModel receiver;
     private LocalDateTime timestamp;
 }
